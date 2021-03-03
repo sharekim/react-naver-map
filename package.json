@@ -1,0 +1,41 @@
+{
+  "name": "react-naver-map",
+  "version": "0.0.1",
+  "description": "naver map with React",
+  "main": "build/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel --port 3001 _test/index.html",
+    "storybook": "start-storybook -p 3000",
+    "build-storybook": "build-storybook -c .storybook -o docs"
+  },
+  "keywords": [
+    "react-naver-map"
+  ],
+  "repository": "https://github.com/MiKyung2/react-naver-map",
+  "homepage": "https://github.com/MiKyung2/react-naver-map",
+  "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@storybook/addon-actions": "^5.3.18",
+    "@storybook/addon-console": "^1.2.1",
+    "@storybook/addon-docs": "^5.3.18",
+    "@storybook/addon-knobs": "^5.3.18",
+    "@storybook/addon-notes": "^5.3.18",
+    "@storybook/addons": "^5.3.18",
+    "@storybook/react": "^5.3.18",
+    "@types/react": "^16.9.35",
+    "@types/react-dom": "^16.9.8",
+    "@types/styled-components": "^5.1.0",
+    "babel-loader": "^8.1.0",
+    "npm-install-peers": "^1.2.2",
+    "parcel-bundler": "^1.12.4",
+    "react-dom": "^16.14.0",
+    "storybook-addon-react-docgen": "^1.2.32",
+    "styled-components": "^5.1.0",
+    "tslint": "^6.1.3",
+    "typescript": "^3.9.3"
+  },
+  "dependencies": {
+    "react": "^17.0.1"
+  }
+}
