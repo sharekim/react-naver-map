@@ -3,5 +3,5 @@ node_modules
 .cache
 dist
 build
-_test
+test
 stories/_lib
