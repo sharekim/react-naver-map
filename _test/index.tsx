@@ -5,6 +5,7 @@ import ReactDOM from "react-dom";
 import styled from "styled-components";
 
 import NaverMap from "../src/Map";
+import NaverMarker from "../src/Marker";
 
 interface ITestComponentProps {
   className?: string;
@@ -23,7 +24,8 @@ let TestComponent: FC<ITestComponentProps> = (props) => {
 
   return (
     <div>
-      <NaverMap width="100%" height={500} center={position} level={3}>
+      <NaverMap width="100%" height={500} center={position} level={18}>
+        <NaverMarker />
       </NaverMap>
     </div>
   );

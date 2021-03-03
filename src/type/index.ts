@@ -30,8 +30,8 @@ export type TSymbolIcon = {
 
 export type TMarkerOptions = {
   position: TPosition;
-  icon: string | TImageIcon | THtmlIcon | TSymbolIcon,
-  shape: any,
+  icon?: string | TImageIcon | THtmlIcon | TSymbolIcon,
+  shape?: any,
   title?: string,
   cursor?: string,
   clickable?: boolean,

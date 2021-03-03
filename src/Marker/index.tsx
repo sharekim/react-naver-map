@@ -12,8 +12,8 @@ const NaverMarker: FunctionComponent<INaverMarker> = (props) => {
   useEffect(() => {
     if (map === null) return;
     const marker = new naver.maps.Marker({
+      ...props,
       position: new naver.maps.LatLng(props.position),
-      map: map,
     });
   }, [map]);
 
