@@ -1,8 +1,9 @@
 import { useEffect, useContext, FunctionComponent } from "react";
 import { NaverMapContext } from "../Map";
+import { TMarkerOptions } from "../type";
 
-interface INaverMarker {
-  position: { lat: number, lng: number };
+interface INaverMarker extends TMarkerOptions {
+
 }
 
 const NaverMarker: FunctionComponent<INaverMarker> = (props) => {

@@ -44,13 +44,14 @@ let NaverMap: React.FunctionComponent<IMainPageProps> = (props) => {
 
   /** 
    * Naver map
-   * 1. 지도 조작
-   * 2. 마커 표시
-   * 3. 커스텀 마커 표시
-   * 4. 폴리곤 표시
+   * 1. 지도 조작 (일반지도, 위성지도, 지적도, 로드뷰, 레벨 +, -, 모바일 - gps)
+   * 2. 커스텀 마커 표시 (클릭 가능한 마커, 지도 클릭으로 마커 생성)
+   * 3. 폴리곤 표시
+   * 4. 클러스터링
    * 5. 주소로 위치 받아오기
    * 6. 위치로 주소 받아오기
    */
+
   return (
     <>
       <NaverMapContext.Provider value={_map}>
