@@ -9,15 +9,30 @@ export type TImageIcon = {
   anchor: TPoint;
 };
 
-export type THtmlIcon = string;
-export type TSymbolIcon = string;
+export type THtmlIcon = {
+  content: string | HTMLElement;
+  size: TSize;
+  anchor: TPoint;
+};
+
+export type TSymbolIcon = {
+  path: string;
+  style: string;
+  radius: string;
+  fillColor: string;
+  fillOpacity: number;
+  strokeColor: string;
+  strokeWeight: number;
+  strokeOpacity: number;
+  anchor: TPoint;
+};
 
 export type TMarkerOptions = {
   position: TPosition;
   icon: string | TImageIcon | THtmlIcon | TSymbolIcon,
   shape: any,
-  title: string,
-  cursor: string,
+  title?: string,
+  cursor?: string,
   clickable?: boolean,
   draggable?: boolean,
   visible?: boolean,
