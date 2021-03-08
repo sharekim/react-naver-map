@@ -1,7 +1,8 @@
-import React from "react";
+import React, { FunctionComponent, useState, useEffect } from "react";
 
 import styled from "styled-components";
 import { createContext } from "react";
+import { TMapTypeId } from "../enum";
 
 declare global {
   let naver: any;
@@ -13,25 +14,30 @@ interface IMainPageProps {
   height: string | number;
   center: { lat: number, lng: number };
   level: number;
-  // mapTypeId: string;
+  mapTypeId?: TMapTypeId;
 }
 
 export const NaverMapContext = createContext(null as any);
 
-let NaverMap: React.FunctionComponent<IMainPageProps> = (props) => {
-  const [_map, setMap] = React.useState<any>(null);
+let NaverMap: FunctionComponent<IMainPageProps> = (props) => {
+  const [_map, setMap] = useState<any>(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     initMap();
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     _map?.setZoom(props.level);
   }, [props.level]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     _map?.setCenter(props.center);
   }, [props.center]);
+
+  // 지도 유형 설정
+  useEffect(() => {
+    _map?.setMapTypeId(props.mapTypeId);
+  }, [props.mapTypeId])
 
   function initMap() {
     const mapOptions = {
@@ -65,6 +71,7 @@ let NaverMap: React.FunctionComponent<IMainPageProps> = (props) => {
 
 NaverMap.defaultProps = {
   center: { lat: 33.3572421, lng: 126.5322317 },
+  mapTypeId: "normal",
 }
 
 NaverMap = styled(NaverMap)`
