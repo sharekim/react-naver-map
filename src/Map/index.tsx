@@ -1,6 +1,6 @@
 import React from "react";
 
-import styled from "styled-components"; 
+import styled from "styled-components";
 import { createContext } from "react";
 
 declare global {
@@ -16,7 +16,7 @@ interface IMainPageProps {
   // mapTypeId: string;
 }
 
-export const NaverMapContext = createContext(null);
+export const NaverMapContext = createContext(null as any);
 
 let NaverMap: React.FunctionComponent<IMainPageProps> = (props) => {
   const [_map, setMap] = React.useState<any>(null);
@@ -38,11 +38,11 @@ let NaverMap: React.FunctionComponent<IMainPageProps> = (props) => {
       center: props.center,
       zoom: props.level,
     };
-  
+
     setMap(new naver.maps.Map('map', mapOptions));
   }
 
-  /** 
+  /**
    * Naver map
    * 1. 지도 조작 (일반지도, 위성지도, 지적도, 로드뷰, 레벨 +, -, 모바일 - gps)
    * 2. 커스텀 마커 표시 (클릭 가능한 마커, 지도 클릭으로 마커 생성)
