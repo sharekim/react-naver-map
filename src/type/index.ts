@@ -23,6 +23,7 @@ export type TMapPadding = {
 }
 
 export type TPointObjectLiteral = TPoint;
+export type TLatLng = TPosition;
 
 export type TImageIcon = {
   url: string;
@@ -310,4 +311,27 @@ export type TMapOptions = {
    * @default null
    */
   zoomOrigin?: TCoordinate | TCoordinateLiteral;
+}
+
+type TMarker = {
+  getAnimation: () => void,
+  getClickable: () => boolean,
+  getContainerTopLeft: () => void,
+  getCursor: () => void,
+  getDraggable: () => void,
+  getDrawingRect: () => TLatLngBounds | TPointBounds,
+  getIcon: () => TImageIcon | TSymbolIcon | THtmlIcon,
+  getOptions: () => string,
+  getPanes: () => void,
+  getPosition: () => TLatLng,
+  getProjection: () => void,
+  getShape: () => void,
+  getTitle: () => string,
+  getVisible: () => boolean,
+  getZIndex: () => number,
+  setPosition: () => boolean,
+  setVisible: () => void,
+  setZIndex: () => void,
+  setTitle: () => void,
+  setShape: () => void,
 }

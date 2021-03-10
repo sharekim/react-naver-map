@@ -17,7 +17,7 @@ interface IMainPageProps {
   mapTypeId?: TMapTypeId;
 }
 
-export const NaverMapContext = createContext(null);
+export const NaverMapContext = createContext(null as any);
 
 let NaverMap: FunctionComponent<IMainPageProps> = (props) => {
   const [_map, setMap] = useState<any>(null);
