@@ -36,7 +36,7 @@ let NaverMap: FunctionComponent<IMainPageProps> = (props) => {
 
   // 지도 유형 설정
   useEffect(() => {
-    _map?.setMapTypeId(props.mapTypeId);
+    _map?.setMapTypeId(naver.maps.MapTypeId[props.mapTypeId ?? "NORMAL"]);
   }, [props.mapTypeId])
 
   function initMap() {
@@ -71,7 +71,7 @@ let NaverMap: FunctionComponent<IMainPageProps> = (props) => {
 
 NaverMap.defaultProps = {
   center: { lat: 33.3572421, lng: 126.5322317 },
-  mapTypeId: "normal",
+  mapTypeId: "NORMAL",
 }
 
 NaverMap = styled(NaverMap)`
