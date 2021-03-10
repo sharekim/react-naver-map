@@ -1,5 +1,3 @@
-// 사용 안하고 싶은 건 따로 제외 할 수 있게
-// 제네릭 사용하면 되지 않을까?
 export const MapTypeId = {
   NORMAL: "일반 지도",
   TERRAIN: "지형도",
@@ -7,7 +5,18 @@ export const MapTypeId = {
   HYBRID: "겹쳐보기 지도",
 } as const;
 
+// 한경에서 사용할때 이용하면 될듯
+type OmitA = keyof Omit<typeof MapTypeId, "SATELLITE">;
+
 export type TMapTypeId = keyof typeof MapTypeId;
+
+type Test = {
+  a: string;
+  b: number;
+  c: boolean;
+}
+
+
 
 export const ControlerPosition = {
   CENTER: 0,
