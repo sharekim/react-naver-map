@@ -1,5 +1,5 @@
 {
-  "name": "react-naver-map",
+  "name": "react-naver-map-ts",
   "version": "0.0.1",
   "description": "naver map with React",
   "main": "build/index.js",
