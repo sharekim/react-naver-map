@@ -3,7 +3,7 @@ import { NaverMapContext } from "../Map";
 import { TMarkerOptions, TPosition, TLatLng } from "../type";
 import styled from "styled-components";
 
-interface INaverMarker extends TMarkerOptions {
+export interface INaverMarker extends TMarkerOptions {
   onClick?: (e: TLatLng) => void;
 }
 

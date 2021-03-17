@@ -8,7 +8,7 @@ declare global {
   let naver: any;
 }
 
-interface IMainPageProps {
+export interface INaverMap {
   className?: string;
   width: string | number;
   height: string | number;
@@ -19,7 +19,7 @@ interface IMainPageProps {
 
 export const NaverMapContext = createContext(null as any);
 
-let NaverMap: FunctionComponent<IMainPageProps> = (props) => {
+let NaverMap: FunctionComponent<INaverMap> = (props) => {
   const [_map, setMap] = useState<any>(null);
 
   useEffect(() => {
