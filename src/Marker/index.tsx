@@ -26,10 +26,16 @@ let NaverMarker: FunctionComponent<INaverMarker> = (props) => {
   useEffect(() => {
     if (marker === null) return;
     naver.maps.Event.addListener(marker, 'click', (e: any) => {
-      props.onClick?.(e.coord);
+      props.onClick?.({
+        lat: e.coord._lat,
+        lng: e.coord._lng,
+      });
     });
     naver.maps.Event.addListener(marker, 'dragend', (e: any) => {
-      props.onDragEnd?.(e.coord);
+      props.onDragEnd?.({
+        lat: e.coord._lat,
+        lng: e.coord._lng,
+      });
     });
   }, [marker]);
 
