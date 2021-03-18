@@ -25,7 +25,7 @@ let TestComponent: FC<ITestComponentProps> = (props) => {
 
   return (
     <div className={props.className}>
-      <NaverMap width="100%" height={500} center={position} level={15}>
+      <NaverMap width="100%" height={498} center={position} level={15}>
         <NaverMarker
           position={position}
           draggable={true}

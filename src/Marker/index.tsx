@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 export interface INaverMarker extends TMarkerOptions {
   onClick?: (e: TLatLng) => void;
+  onDragEnd?: (e: TLatLng) => void;
 }
 
 let NaverMarker: FunctionComponent<INaverMarker> = (props) => {
@@ -26,6 +27,9 @@ let NaverMarker: FunctionComponent<INaverMarker> = (props) => {
     if (marker === null) return;
     naver.maps.Event.addListener(marker, 'click', (e: any) => {
       props.onClick?.(e.coord);
+    });
+    naver.maps.Event.addListener(marker, 'dragend', (e: any) => {
+      props.onDragEnd?.(e.coord);
     });
   }, [marker]);
 

@@ -60,6 +60,7 @@ let NaverMap: FunctionComponent<INaverMap> = (props) => {
 
   return (
     <>
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=rfwp6173ew&callback=initMap"></script>
       <NaverMapContext.Provider value={_map}>
         <div id="map" className={props.className}>
           {props.children}
