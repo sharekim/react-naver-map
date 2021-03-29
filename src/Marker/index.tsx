@@ -2,6 +2,7 @@ import { useEffect, useContext, FunctionComponent, useState } from "react";
 import { NaverMapContext } from "../Map";
 import { TMarkerOptions, TPosition, TLatLng } from "../type";
 import styled from "styled-components";
+import useDidMountEffect from "../utils";
 
 export interface INaverMarker extends TMarkerOptions {
   onClick?: (e: TLatLng) => void;
@@ -23,7 +24,7 @@ let NaverMarker: FunctionComponent<INaverMarker> = (props) => {
 
   }, [map]);
 
-  useEffect(() => {
+  useDidMountEffect(() => {
     if (marker === null) return;
     naver.maps.Event.addListener(marker, 'click', (e: any) => {
       props.onClick?.({
@@ -39,28 +40,28 @@ let NaverMarker: FunctionComponent<INaverMarker> = (props) => {
     });
   }, [marker]);
 
-  useEffect(() => {
-    if (map === null) return;
+  useDidMountEffect(() => {
+    if (map === null || marker === null) return;
     marker.setPosition(props.position);
   }, [props.position]);
 
-  useEffect(() => {
-    if (map === null) return;
+  useDidMountEffect(() => {
+    if (map === null || marker === null) return;
     marker.setVisible(props.visible);
   }, [props.visible]);
 
-  useEffect(() => {
-    if (map === null) return;
+  useDidMountEffect(() => {
+    if (map === null || marker === null) return;
     marker.setZIndex(props.zIndex);
   }, [props.zIndex]);
 
-  useEffect(() => {
-    if (map === null) return;
+  useDidMountEffect(() => {
+    if (map === null || marker === null) return;
     marker.setTitle(props.title);
   }, [props.title]);
 
-  useEffect(() => {
-    if (map === null) return;
+  useDidMountEffect(() => {
+    if (map === null || marker === null) return;
     marker.setShape(props.shape);
   }, [props.shape]);
 

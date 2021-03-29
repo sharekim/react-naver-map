@@ -18,10 +18,14 @@ let TestComponent: FC<ITestComponentProps> = (props) => {
   const [content, setContent] = useState("가나다");
   const [content2, setContent2] = useState("마바사");
 
+  // useEffect(() => {
+  //   setContent(`${Math.random()}`);
+  //   setContent2(`${Math.random()}`);
+  // }, [position]);
+
   useEffect(() => {
-    setContent(`${Math.random()}`);
-    setContent2(`${Math.random()}`);
-  }, [position])
+    setPosition({ lat: 37.3701882, lng: 127.1290817 });
+  }, []);
 
   return (
     <div className={props.className}>
