@@ -1,6 +1,6 @@
 {
-  "name": "react-naver-map-ts",
-  "version": "0.3.4",
+  "name": "sharekim-naver-map",
+  "version": "0.0.1",
   "description": "naver map with React",
   "main": "build/index.js",
   "scripts": {
