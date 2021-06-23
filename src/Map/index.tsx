@@ -8,7 +8,7 @@ declare global {
   let naver: any;
 }
 
-interface IMainPageProps extends TMapOptions {
+export interface INaverMap  extends TMapOptions {
   className?: string;
   width: string | number;
   height: string | number;
@@ -18,7 +18,7 @@ interface IMainPageProps extends TMapOptions {
 
 export const NaverMapContext = createContext(null as any);
 
-let NaverMap: FunctionComponent<IMainPageProps> = (props) => {
+let NaverMap: FunctionComponent<INaverMap> = (props) => {
   const listeners = React.useRef<{ [listener: string]: (...args: any[]) => void }>({});
 
   listeners.current.onClick = function onClick(e: any) {
@@ -76,6 +76,7 @@ let NaverMap: FunctionComponent<IMainPageProps> = (props) => {
 
   return (
     <>
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=rfwp6173ew&callback=initMap"></script>
       <NaverMapContext.Provider value={_map}>
         <div id="map" className={props.className}>
           {props.children}

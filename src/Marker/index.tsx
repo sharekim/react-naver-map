@@ -2,9 +2,11 @@ import { useEffect, useContext, FunctionComponent, useState } from "react";
 import { NaverMapContext } from "../Map";
 import { TMarkerOptions, TPosition, TLatLng } from "../type";
 import styled from "styled-components";
+import useDidMountEffect from "../utils";
 
-interface INaverMarker extends TMarkerOptions {
+export interface INaverMarker extends TMarkerOptions {
   onClick?: (e: TLatLng) => void;
+  onDragEnd?: (e: TLatLng) => void;
 }
 
 let NaverMarker: FunctionComponent<INaverMarker> = (props) => {
@@ -22,35 +24,44 @@ let NaverMarker: FunctionComponent<INaverMarker> = (props) => {
 
   }, [map]);
 
-  useEffect(() => {
+  useDidMountEffect(() => {
     if (marker === null) return;
     naver.maps.Event.addListener(marker, 'click', (e: any) => {
-      props.onClick?.(e.coord);
+      props.onClick?.({
+        lat: e.coord._lat,
+        lng: e.coord._lng,
+      });
+    });
+    naver.maps.Event.addListener(marker, 'dragend', (e: any) => {
+      props.onDragEnd?.({
+        lat: e.coord._lat,
+        lng: e.coord._lng,
+      });
     });
   }, [marker]);
 
-  useEffect(() => {
-    if (map === null) return;
+  useDidMountEffect(() => {
+    if (map === null || marker === null) return;
     marker.setPosition(props.position);
   }, [props.position]);
 
-  useEffect(() => {
-    if (map === null) return;
+  useDidMountEffect(() => {
+    if (map === null || marker === null) return;
     marker.setVisible(props.visible);
   }, [props.visible]);
 
-  useEffect(() => {
-    if (map === null) return;
+  useDidMountEffect(() => {
+    if (map === null || marker === null) return;
     marker.setZIndex(props.zIndex);
   }, [props.zIndex]);
 
-  useEffect(() => {
-    if (map === null) return;
+  useDidMountEffect(() => {
+    if (map === null || marker === null) return;
     marker.setTitle(props.title);
   }, [props.title]);
 
-  useEffect(() => {
-    if (map === null) return;
+  useDidMountEffect(() => {
+    if (map === null || marker === null) return;
     marker.setShape(props.shape);
   }, [props.shape]);
 
