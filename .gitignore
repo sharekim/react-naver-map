@@ -1,7 +1,9 @@
 node_modules
 .vscode
 .cache
+.idea/
 dist
 build
-_test
+_test/index.html
+_test/index.text
 stories/_lib
