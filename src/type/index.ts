@@ -146,7 +146,8 @@ export type TMapOptions = {
    * 지도의 초기 중심 좌표입니다. 기본값은 서울 시청 좌표(37.5666103, 126.9783882)입니다.
    * @default 서울시청 (37.5666103, 126.9783882)
    */
-  center?: TCoordinate | TCoordinateLiteral;
+  // center?: TCoordinate | TCoordinateLiteral;
+  center?: TPoint;
 
   /**
    * 사용자가 지도 위에서 마우스 버튼을 더블 클릭해 지도를 확대하는 기능의 사용 여부입니다.
@@ -228,7 +229,7 @@ export type TMapOptions = {
    * 지도에서 보이는 최대 좌표 경계입니다. 지도의 중심 좌표는 지정한 최대 좌표 경계 내에서만 설정할 수 있습니다.
    * @default null
    */
-  maxBounds: TBounds | TBoundsLiteral | null;
+  maxBounds?: TBounds | TBoundsLiteral | null;
 
   /** 지도의 최대 줌 레벨입니다. 이 값을 설정하지 않으면 지정된 초기 지도 유형의 최고 줌 레벨로 설정합니다. */
   maxZoom?: number;
@@ -334,4 +335,21 @@ type TMarker = {
   setZIndex: () => void,
   setTitle: () => void,
   setShape: () => void,
+}
+
+export type TPointerEvent = {
+  // 이벤트가 발생한  지도 좌표입니다.
+  coord: TCoordinate;
+
+  // 이벤트가 발생한 위치의 세계 좌표입니다.
+  point: TPoint;
+
+  // 이벤트가 발생한 위치의 픽셀 좌표입니다.
+  offset:	TPoint;
+
+  // 이벤트가 발생한 시점의 DOM 이벤트 객체입니다.
+  pointerEvent:	any;
+
+  // 이벤트가 발생한 오버레이 객체입니다.
+  overlay?: any;
 }

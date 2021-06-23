@@ -1,34 +1,59 @@
-import React, { FunctionComponent, useState, useEffect } from "react";
+import React, {FunctionComponent, useState, useEffect} from "react";
 
 import styled from "styled-components";
-import { createContext } from "react";
-import { TMapTypeId } from "../enum";
+import {createContext} from "react";
+import {TMapOptions, TPoint} from "../type";
 
 declare global {
   let naver: any;
 }
 
-interface IMainPageProps {
+interface IMainPageProps extends TMapOptions {
   className?: string;
   width: string | number;
   height: string | number;
-  center: { lat: number, lng: number };
-  level: number;
-  mapTypeId?: TMapTypeId;
+
+  onClick(e: { position: TPoint }): void;
 }
 
 export const NaverMapContext = createContext(null as any);
 
 let NaverMap: FunctionComponent<IMainPageProps> = (props) => {
+  const listeners = React.useRef<{ [listener: string]: (...args: any[]) => void }>({});
+
+  listeners.current.onClick = function onClick(e: any) {
+    props.onClick?.({
+      position: {
+        x: e.latlng.x,
+        y: e.latlng.y
+      },
+    });
+  }
+
   const [_map, setMap] = useState<any>(null);
 
   useEffect(() => {
-    initMap();
+    const mapOptions = {
+      zoom: 18,
+      center: new naver.maps.LatLng(props.center ? { x: props.center.x, y: props.center.y } : { x: 33.3572421, y: 126.5322317})
+    };
+
+    const map = new naver.maps.Map('map', mapOptions);
+
+    setMap(map);
+
+    naver.maps.Event.addListener(map, "click", listeners.current.onClick);
   }, []);
 
   useEffect(() => {
-    _map?.setZoom(props.level);
-  }, [props.level]);
+    return () => {
+      naver.maps.Event.removeListener(_map, "click");
+    }
+  }, []);
+
+  useEffect(() => {
+    _map?.setZoom(props.zoom);
+  }, [props.zoom]);
 
   useEffect(() => {
     _map?.setCenter(props.center);
@@ -38,15 +63,6 @@ let NaverMap: FunctionComponent<IMainPageProps> = (props) => {
   useEffect(() => {
     _map?.setMapTypeId(naver.maps.MapTypeId[props.mapTypeId ?? "NORMAL"]);
   }, [props.mapTypeId])
-
-  function initMap() {
-    const mapOptions = {
-      center: props.center,
-      zoom: props.level,
-    };
-
-    setMap(new naver.maps.Map('map', mapOptions));
-  }
 
   /**
    * Naver map
@@ -70,12 +86,12 @@ let NaverMap: FunctionComponent<IMainPageProps> = (props) => {
 };
 
 NaverMap.defaultProps = {
-  center: { lat: 33.3572421, lng: 126.5322317 },
+  center: {x: 33.3572421, y: 126.5322317},
   mapTypeId: "NORMAL",
 }
 
 NaverMap = styled(NaverMap)`
-  width: ${({ width }) => typeof width === "number" ? `${width}px` : width};
-  height: ${({ height }) => typeof height === "number" ? `${height}px` : height};
+  width: ${({width}) => typeof width === "number" ? `${width}px` : width};
+  height: ${({height}) => typeof height === "number" ? `${height}px` : height};
 `
 export default NaverMap;

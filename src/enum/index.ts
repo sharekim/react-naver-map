@@ -10,13 +10,6 @@ type OmitA = keyof Omit<typeof MapTypeId, "SATELLITE">;
 
 export type TMapTypeId = keyof typeof MapTypeId;
 
-type Test = {
-  a: string;
-  b: number;
-  c: boolean;
-}
-
-
 
 export const ControlerPosition = {
   CENTER: 0,
