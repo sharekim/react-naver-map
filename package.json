@@ -1,14 +1,13 @@
 {
   "name": "sharekim-react-naver-map",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "naver map with React",
   "main": "build/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "parcel --port 8082 _test/index.html",
     "storybook": "start-storybook -p 3000",
-    "build-storybook": "build-storybook -c .storybook -o docs",
-    "publish": "tsc --build && npm publish"
+    "build-storybook": "build-storybook -c .storybook -o docs"
   },
   "keywords": [
     "react-naver-map"

@@ -220,7 +220,7 @@ export type TMapOptions = {
    * 지도의 초기 지도 유형 id입니다.
    * @default NORMAL
    */
-  mapTypeId: TMapTypeId;
+  mapTypeId?: TMapTypeId;
 
   /** 지도 유형의 컬렉션을 포함하는 객체입니다. 이 값을 설정하지 않으면 사전에 정의된 NAVER 지도의 기본 지도 유형으로 설정합니다. */
   mapTypes?: TMapTypeRegistry;
