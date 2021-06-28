@@ -13,7 +13,7 @@ export interface INaverMap  extends TMapOptions {
   width: string | number;
   height: string | number;
 
-  onClick(e: { position: TPoint }): void;
+  onClick?: (e: { position: TPoint }) => void;
 }
 
 export const NaverMapContext = createContext(null as any);
