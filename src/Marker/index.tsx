@@ -1,12 +1,12 @@
 import { useEffect, useContext, FunctionComponent, useState } from "react";
 import { NaverMapContext } from "../Map";
-import { TMarkerOptions, TPosition, TLatLng } from "../type";
+import { TMarkerOptions, TPosition, TLatLng, TPoint } from "../type";
 import styled from "styled-components";
 import useDidMountEffect from "../utils";
 
 export interface INaverMarker extends TMarkerOptions {
-  onClick?: (e: TLatLng) => void;
-  onDragEnd?: (e: TLatLng) => void;
+  onClick?: (e: TPoint) => void;
+  onDragEnd?: (e: TPoint) => void;
 }
 
 let NaverMarker: FunctionComponent<INaverMarker> = (props) => {
@@ -28,14 +28,14 @@ let NaverMarker: FunctionComponent<INaverMarker> = (props) => {
     if (marker === null) return;
     naver.maps.Event.addListener(marker, 'click', (e: any) => {
       props.onClick?.({
-        lat: e.coord._lat,
-        lng: e.coord._lng,
+        y: e.coord._lat,
+        x: e.coord._lng,
       });
     });
     naver.maps.Event.addListener(marker, 'dragend', (e: any) => {
       props.onDragEnd?.({
-        lat: e.coord._lat,
-        lng: e.coord._lng,
+        y: e.coord._lat,
+        x: e.coord._lng,
       });
     });
   }, [marker]);

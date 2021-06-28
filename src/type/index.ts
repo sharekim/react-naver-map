@@ -52,7 +52,7 @@ export type TSymbolIcon = {
 };
 
 export type TMarkerOptions = {
-  position: TPosition;
+  position: TPoint;
   icon?: string | TImageIcon | THtmlIcon | TSymbolIcon,
   shape?: any,
   title?: string,
