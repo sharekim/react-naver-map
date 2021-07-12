@@ -1,4 +1,4 @@
-import { useEffect, useContext, FunctionComponent, useState, useMemo } from "react";
+import React, { useEffect, useContext, FunctionComponent, useState, useMemo } from "react";
 import { NaverMapContext } from "../Map";
 import { TMarkerOptions, TPosition, TLatLng, TPoint, THtmlIcon } from "../type";
 import styled from "styled-components";
@@ -7,6 +7,7 @@ import ReactDOM from "react-dom";
 
 
 export interface INaverMarker extends TMarkerOptions {
+  element?: any;
   icon?: TMarkerOptions["icon"],
   onClick?: (e: TPoint) => void;
   onDragEnd?: (e: TPoint) => void;
@@ -15,13 +16,13 @@ export interface INaverMarker extends TMarkerOptions {
 let NaverMarker: FunctionComponent<INaverMarker> = (props) => {
   const map = useContext(NaverMapContext);
   const [marker, setMarker] = useState<any>(null);
+  
   const content = useMemo(() => {
     return document.createElement("div");
-  }, []);
+  }, [props.element]);
 
   useEffect(() => {
     if (map === null) return;
-
 
     setMarker(new naver.maps.Marker({
       ...props,
@@ -29,10 +30,9 @@ let NaverMarker: FunctionComponent<INaverMarker> = (props) => {
       position: new naver.maps.LatLng(props.position),
       icon: typeof props.icon !== "string" ? {
         ...props.icon,
-        content: props?.icon?.hasOwnProperty("content") ? ReactDOM.createPortal(props.children, content) : undefined
+        content: props.element ? content : undefined
       } : undefined
     }));
-
   }, [map]);
 
   useDidMountEffect(() => {
@@ -81,7 +81,7 @@ let NaverMarker: FunctionComponent<INaverMarker> = (props) => {
   //   marker.setOptions(props.shape);
   // }, [props.shape]);
 
-  return null;
+  return <>{ReactDOM.createPortal(props.children, content)}</>;
 }
 
 NaverMarker = styled(NaverMarker)`
