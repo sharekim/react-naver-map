@@ -1,10 +1,13 @@
-import { useEffect, useContext, FunctionComponent, useState } from "react";
+import { useEffect, useContext, FunctionComponent, useState, useMemo } from "react";
 import { NaverMapContext } from "../Map";
-import { TMarkerOptions, TPosition, TLatLng, TPoint } from "../type";
+import { TMarkerOptions, TPosition, TLatLng, TPoint, THtmlIcon } from "../type";
 import styled from "styled-components";
 import useDidMountEffect from "../utils";
+import ReactDOM from "react-dom";
+
 
 export interface INaverMarker extends TMarkerOptions {
+  icon?: TMarkerOptions["icon"],
   onClick?: (e: TPoint) => void;
   onDragEnd?: (e: TPoint) => void;
 }
@@ -12,14 +15,22 @@ export interface INaverMarker extends TMarkerOptions {
 let NaverMarker: FunctionComponent<INaverMarker> = (props) => {
   const map = useContext(NaverMapContext);
   const [marker, setMarker] = useState<any>(null);
+  const content = useMemo(() => {
+    return document.createElement("div");
+  }, []);
 
   useEffect(() => {
     if (map === null) return;
+
 
     setMarker(new naver.maps.Marker({
       ...props,
       map,
       position: new naver.maps.LatLng(props.position),
+      icon: typeof props.icon !== "string" ? {
+        ...props.icon,
+        content: props?.icon?.hasOwnProperty("content") ? ReactDOM.createPortal(props.children, content) : undefined
+      } : undefined
     }));
 
   }, [map]);
