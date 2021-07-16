@@ -2,7 +2,7 @@ import React, {FunctionComponent, useState, useEffect} from "react";
 
 import styled from "styled-components";
 import {createContext} from "react";
-import {TMapOptions, TPoint} from "../type";
+import {TMapOptions, TPoint, TPointBounds} from "../type";
 
 declare global {
   let naver: any;
@@ -13,7 +13,7 @@ export interface INaverMap  extends TMapOptions {
   width: string | number;
   height: string | number;
   onClick?: (e: { position: TPoint }) => void;
-  onChangedBounds?: (bounds: any) => void;
+  onChangedBounds?: (bounds: TPointBounds) => void;
 }
 
 export const NaverMapContext = createContext(null as any);
@@ -32,17 +32,12 @@ let NaverMap: FunctionComponent<INaverMap> = (props) => {
   }
 
   listeners.current.onChangedBounds = function onChangedBounds(bounds: any) {
-    console.log(bounds);
-    console.log(bounds.getMax());
-    console.log(bounds.getMin());
-    console.log(bounds.getMin().x);
-    console.log(bounds.getMin().y);
+    const min = bounds.getMin();
+    const max = bounds.getMax();
     props.onChangedBounds?.({
-      bounds: {
-        min: bounds.getMin(),
-        max: bounds.getMax(),
-      },
-    })
+      minPoint: { x: min.x, y: min.y },
+      maxPoint: { x: max.x, y: max.y },
+    });
   }
 
   const [_map, setMap] = useState<any>(null);
