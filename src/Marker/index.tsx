@@ -34,6 +34,10 @@ let NaverMarker: FunctionComponent<INaverMarker> = (props) => {
         content: props.element ? content : undefined
       } : undefined
     }));
+
+    return () => {
+      marker.setMap(null);
+    }
   }, [map]);
 
   useDidMountEffect(() => {
@@ -57,8 +61,10 @@ let NaverMarker: FunctionComponent<INaverMarker> = (props) => {
       console.log(e);
     });
 
-    return {
-
+    return () => {
+      naver.maps.Event.removeListiner(marker, 'click');
+      naver.maps.Event.removeListiner(marker, 'dragend');
+      naver.maps.Event.removeListiner(marker, 'idle');
     }
   }, [marker]);
 
