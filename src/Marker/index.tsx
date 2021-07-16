@@ -36,7 +36,7 @@ let NaverMarker: FunctionComponent<INaverMarker> = (props) => {
     }));
 
     return () => {
-      marker.setMap(null);
+      setMarker(null);
     }
   }, [map]);
 
