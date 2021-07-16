@@ -23,7 +23,6 @@ let NaverMap: FunctionComponent<INaverMap> = (props) => {
   const listeners = React.useRef<{ [listener: string]: (...args: any[]) => void }>({});
 
   listeners.current.onClick = function onClick(e: any) {
-    console.log(e);
     props.onClick?.({
       position: {
         x: e.latlng.x,
@@ -56,7 +55,8 @@ let NaverMap: FunctionComponent<INaverMap> = (props) => {
     naver.maps.Event.addListener(map, "click", listeners.current.onClick);
     naver.maps.Event.addListener(map, "bounds_changed", listeners.current.onChangedBounds);
     naver.maps.Event.addListener(map, "mouseup", () => {
-      props.onMouseUp?.(map.getBounds());
+      // props.onMouseUp?.(map.getBounds());
+      props.onMouseUp?.("event");
     });
   }, []);
 
