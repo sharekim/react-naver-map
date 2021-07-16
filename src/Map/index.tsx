@@ -33,8 +33,15 @@ let NaverMap: FunctionComponent<INaverMap> = (props) => {
 
   listeners.current.onChangedBounds = function onChangedBounds(bounds: any) {
     console.log(bounds);
+    console.log(bounds.getMax());
+    console.log(bounds.getMin());
+    console.log(bounds.getMin().x);
+    console.log(bounds.getMin().y);
     props.onChangedBounds?.({
-      bounds,
+      bounds: {
+        min: bounds.getMin(),
+        max: bounds.getMax(),
+      },
     })
   }
 
