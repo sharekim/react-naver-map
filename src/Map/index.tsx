@@ -14,7 +14,7 @@ export interface INaverMap  extends TMapOptions {
   height: string | number;
   onClick?: (e: { position: TPoint }) => void;
   onChangedBounds?: (bounds: TPointBounds) => void;
-  onMouseUp?: (bounds: any) => void;
+  onMouseUp?: (bounds: any, string: any) => void;
 }
 
 export const NaverMapContext = createContext(null as any);
@@ -52,12 +52,14 @@ let NaverMap: FunctionComponent<INaverMap> = (props) => {
 
     setMap(map);
 
+    listeners.current.onMouseUp = () => {
+      // props.onMouseUp?.(map.getBounds());
+      props.onMouseUp?.("event", map.getBounds());
+    }
+
     naver.maps.Event.addListener(map, "click", listeners.current.onClick);
     naver.maps.Event.addListener(map, "bounds_changed", listeners.current.onChangedBounds);
-    naver.maps.Event.addListener(map, "mouseup", () => {
-      // props.onMouseUp?.(map.getBounds());
-      props.onMouseUp?.("event");
-    });
+    naver.maps.Event.addListener(map, "mouseup", listeners.current.onMouseUp);
   }, []);
 
   useEffect(() => {
