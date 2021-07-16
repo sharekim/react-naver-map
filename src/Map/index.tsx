@@ -13,7 +13,7 @@ export interface INaverMap  extends TMapOptions {
   width: string | number;
   height: string | number;
   onClick?: (e: { position: TPoint }) => void;
-  onIdle?: () => void;
+  onChangedBounds?: (bounds: any) => void;
 }
 
 export const NaverMapContext = createContext(null as any);
@@ -30,6 +30,13 @@ let NaverMap: FunctionComponent<INaverMap> = (props) => {
     });
   }
 
+  listeners.current.onChangedBounds = function onChangedBounds(e: any) {
+    console.log(e);
+    props.onChangedBounds?.({
+      bounds: e.bounds,
+    })
+  }
+
   const [_map, setMap] = useState<any>(null);
 
   useEffect(() => {
@@ -43,17 +50,13 @@ let NaverMap: FunctionComponent<INaverMap> = (props) => {
     setMap(map);
 
     naver.maps.Event.addListener(map, "click", listeners.current.onClick);
-    naver.maps.Event.addListener(map, "idle", listeners.current.onIdle = function onIdle(e: any) {
-      console.log(map.getBounds());
-      console.log(e);
-      props.onIdle?.();
-    });
+    naver.maps.Event.addListener(map, "bounds_changed", listeners.current.onChangedBounds);
   }, []);
 
   useEffect(() => {
     return () => {
       naver.maps.Event.removeListener(_map, "click");
-      naver.maps.Event.removeListener(_map, "idle");
+      naver.maps.Event.removeListener(_map, "bounds_changed");
     }
   }, []);
 
