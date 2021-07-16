@@ -11,6 +11,7 @@ export interface INaverMarker extends TMarkerOptions {
   icon?: TMarkerOptions["icon"],
   onClick?: (e: TPoint) => void;
   onDragEnd?: (e: TPoint) => void;
+  onIdle?: (e: any) => void;
 }
 
 let NaverMarker: FunctionComponent<INaverMarker> = (props) => {
@@ -49,6 +50,16 @@ let NaverMarker: FunctionComponent<INaverMarker> = (props) => {
         x: e.coord._lng,
       });
     });
+    naver.maps.Event.addListener(marker, 'idle', (e: any) => {
+      props.onIdle?.({
+
+      })
+      console.log(e);
+    });
+
+    return {
+
+    }
   }, [marker]);
 
   useDidMountEffect(() => {
