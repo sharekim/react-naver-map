@@ -22,6 +22,7 @@ let NaverMap: FunctionComponent<INaverMap> = (props) => {
   const listeners = React.useRef<{ [listener: string]: (...args: any[]) => void }>({});
 
   listeners.current.onClick = function onClick(e: any) {
+    console.log(e);
     props.onClick?.({
       position: {
         x: e.latlng.x,
@@ -30,10 +31,10 @@ let NaverMap: FunctionComponent<INaverMap> = (props) => {
     });
   }
 
-  listeners.current.onChangedBounds = function onChangedBounds(e: any) {
-    console.log(e);
+  listeners.current.onChangedBounds = function onChangedBounds(bounds: any) {
+    console.log(bounds);
     props.onChangedBounds?.({
-      bounds: e.bounds,
+      bounds,
     })
   }
 
