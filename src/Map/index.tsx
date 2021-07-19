@@ -44,7 +44,7 @@ let NaverMap: FunctionComponent<INaverMap> = (props) => {
 
   useEffect(() => {
     const mapOptions = {
-      zoom: 18,
+      zoom: props.zoom,
       center: new naver.maps.LatLng(props.center ? { x: props.center.x, y: props.center.y } : { x: 33.3572421, y: 126.5322317})
     };
 
