@@ -13,7 +13,7 @@ export interface INaverMap  extends TMapOptions {
   width: string | number;
   height: string | number;
   onClick?: (e: { position: TPoint }) => void;
-  onChangeZoom?: (zoom: number) => void;
+  onChangedZoom?: (zoom: number) => void;
   onChangedBounds?: (bounds: TPointBounds) => void;
   onMouseUp?: (bounds: any, string: any) => void;
 }
@@ -32,8 +32,8 @@ let NaverMap: FunctionComponent<INaverMap> = (props) => {
     });
   }
 
-  listeners.current.onChangeZoom = function onChangeZoom(zoom: number) {
-    props.onChangeZoom?.(zoom);
+  listeners.current.onChangedZoom = function onChangedZoom(zoom: number) {
+    props.onChangedZoom?.(zoom);
   }
 
   listeners.current.onChangedBounds = function onChangedBounds(bounds: any) {
@@ -65,7 +65,7 @@ let NaverMap: FunctionComponent<INaverMap> = (props) => {
     naver.maps.Event.addListener(map, "click", listeners.current.onClick);
     naver.maps.Event.addListener(map, "bounds_changed", listeners.current.onChangedBounds);
     naver.maps.Event.addListener(map, "mouseup", listeners.current.onMouseUp);
-    naver.maps.Event.addListener(map, "zoom_changed", listeners.current.onChangeZoom);
+    naver.maps.Event.addListener(map, "zoom_changed", listeners.current.onChangedZoom);
   }, []);
 
   useEffect(() => {
