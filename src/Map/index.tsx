@@ -3,6 +3,7 @@ import React, {FunctionComponent, useState, useEffect} from "react";
 import styled from "styled-components";
 import {createContext} from "react";
 import {TMapOptions, TPoint, TPointBounds} from "../type";
+import { TMapTypeId } from "../enum";
 
 declare global {
   let naver: any;
@@ -12,7 +13,7 @@ export interface INaverMap  extends TMapOptions {
   className?: string;
   width: string | number;
   height: string | number;
-  imageMapType?: string;
+  mapTypeId?: TMapTypeId;
   onClick?: (e: { position: TPoint }) => void;
   onChangedZoom?: (zoom: number) => void;
   onChangedBounds?: (bounds: TPointBounds) => void;
@@ -76,12 +77,6 @@ let NaverMap: FunctionComponent<INaverMap> = (props) => {
       naver.maps.Event.removeListener(_map, "zoom_changed");
     }
   }, []);
-
-  useEffect(() => {
-    if (!props?.imageMapType) return;
-
-    _map.setMapTypeId(props?.imageMapType);
-  }, [props?.imageMapType]);
 
   useEffect(() => {
     _map?.setZoom(props.zoom);
